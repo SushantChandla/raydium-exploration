@@ -1,2 +1,3 @@
 node_modules
-jsons
+jsons/**.json
+!jsons/formattedRadiumPool1.json
