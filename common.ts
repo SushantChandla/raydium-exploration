@@ -1,7 +1,7 @@
 import { IDL, RaydiumCpSwap } from "./raydiumCpSwap";
 
 import * as anchor from "@project-serum/anchor";
-import { Program } from "@project-serum/anchor";
+import { BorshCoder, EventParser, Program } from "@project-serum/anchor";
 import NodeWallet from "@project-serum/anchor/dist/cjs/nodewallet";
 import { PublicKey } from "@solana/web3.js";
 
@@ -13,7 +13,7 @@ const RAYDIUM_CP_SWAP_KEY = "CPMMoo8L3F4NbTegBCKVNunggL7H1ZpdTHKxQB5qKP1C";
 export const program = new Program<RaydiumCpSwap>(
   IDL,
   RAYDIUM_CP_SWAP_KEY,
-  provider
+  provider,
 );
 
 //
@@ -25,11 +25,11 @@ export const program = new Program<RaydiumCpSwap>(
 //
 
 export const solUsdcPool1 = new PublicKey(
-  "7JuwJuNU88gurFnyWeiyGKbFmExMWcmRZntn9imEzdny"
+  "7JuwJuNU88gurFnyWeiyGKbFmExMWcmRZntn9imEzdny",
 );
 
 export const solUsdcPool2 = new PublicKey(
-  "FdyhqDuVfQLe5P9QBySvAEf1wSHFDfvS7zpZo8ZT8PVM"
+  "FdyhqDuVfQLe5P9QBySvAEf1wSHFDfvS7zpZo8ZT8PVM",
 );
 
 export const SOL_USDC_POOL_1_FILE = "./sol_usdc_pool1.json";
@@ -46,3 +46,10 @@ export const readStorage = (filePath: string) => {
 export const writeDataToStorage = (filePath: string, data: object) => {
   writeFileSync(filePath, JSON.stringify(data, null, 2));
 };
+
+export const eventParser = new EventParser(
+  program.programId,
+  new BorshCoder(program.idl),
+);
+
+export type SwapEvent = anchor.IdlEvents<RaydiumCpSwap>["SwapEvent"];

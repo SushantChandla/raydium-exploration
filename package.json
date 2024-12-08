@@ -1,9 +1,11 @@
 {
   "dependencies": {
     "@project-serum/anchor": "0.26.0",
-    "@solana/web3.js": "1.95.0"
+    "@solana/web3.js": "1.95.0",
+    "big.js": "^6.2.2"
   },
   "devDependencies": {
+    "@types/big.js": "^6.2.2",
     "typescript": "^5.7.2"
   }
 }
